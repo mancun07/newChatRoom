@@ -5,7 +5,7 @@ import io from "socket.io-client";
 import Chat from "./components/Chat";
 import Home from "./components/Home";
 
-const socket = io.connect("http://localhost:5000");
+const socket = io.connect("/");
 
 const App = () => {
   const [users, setUsers] = useState([]);

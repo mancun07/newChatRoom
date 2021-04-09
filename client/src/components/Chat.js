@@ -12,7 +12,7 @@ const Chat = ({ users, updateUsers, messages, updateMessages }) => {
 
   useEffect(() => {
     // Join chatroom
-    socket.current = io.connect("http://localhost:5000");
+    socket.current = io.connect("/");
     socket.current.emit("joinRoom", { username, room });
 
     //Listen Messages from the server
