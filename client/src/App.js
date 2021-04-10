@@ -1,21 +1,17 @@
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import io from "socket.io-client";
 
 import Chat from "./components/Chat";
 import Home from "./components/Home";
-
-const socket = io.connect("/");
+import NoMatch from "./components/NoMatch";
 
 const App = () => {
   const [users, setUsers] = useState([]);
   const [messages, setMessages] = useState([]);
 
-  // const socket = useRef();
-
   // List of users
   const updateUsers = (users) => {
-    setUsers((oldUsers) => [...users]);
+    setUsers(users);
   };
 
   // List of messages
@@ -28,7 +24,7 @@ const App = () => {
       <div className="chat-container">
         <Switch>
           <Route exact path="/">
-            <Home users={users} updateUsers={updateUsers} />
+            <Home />
           </Route>
           <Route path="/chat">
             <Chat
@@ -37,6 +33,9 @@ const App = () => {
               messages={messages}
               updateMessages={updateMessages}
             />
+          </Route>
+          <Route path={"*"}>
+            <NoMatch />
           </Route>
         </Switch>
       </div>

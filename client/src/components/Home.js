@@ -1,41 +1,27 @@
-import React, { useState, useRef, useEffect } from "react";
-import io from "socket.io-client";
-import { Link } from "react-router-dom";
+import { useState } from "react";
 
-const Home = ({ users, updateUsers }) => {
+const Home = () => {
   const [username, setUsername] = useState("");
   const [room, setRoom] = useState("Funs of Zenit");
-  console.log(users);
-
-  const socket = useRef();
-  // useEffect(() => {
-  //   socket.current = io.connect("http://localhost:5000");
-
-  //   //   // Listen room and users info from the server
-  //   socket.current.on("roomUsers", ({ room, users }) => {
-  //     // updateUsers(users);
-  //     // setServerRoom(room);
-  //   });
-  // }, []);
 
   const onSubmit = (e) => {
     e.preventDefault();
     window.location = `/chat?username=${username}&room=${room}`;
+    setUsername("");
+    setRoom("Funs of Zenit");
   };
 
-  // const socket = io();
-  // action={"/chat"}
   return (
-    <div class="join-container">
-      <header class="join-header">
+    <div className="join-container">
+      <header className="join-header">
         <h1>
-          <i class="fas fa-smile"></i>SportChat
+          <i className="fas fa-smile"></i>SportChat
         </h1>
       </header>
-      <main class="join-main">
+      <main className="join-main">
         <form onSubmit={onSubmit}>
-          <div class="form-control">
-            <label for="username">Username</label>
+          <div className="form-control">
+            <label htmlFor="username">Username</label>
             <input
               onChange={(e) => setUsername(e.target.value)}
               value={username}
@@ -46,8 +32,8 @@ const Home = ({ users, updateUsers }) => {
               required
             />
           </div>
-          <div class="form-control">
-            <label for="room">Room</label>
+          <div className="form-control">
+            <label htmlFor="room">Room</label>
             <select
               name="room"
               id="room"
@@ -60,11 +46,9 @@ const Home = ({ users, updateUsers }) => {
               <option value="Funs of Sochi">Funs of Sochi</option>
             </select>
           </div>
-          {/* <Link to={"./chat"}> */}
-          <button type="submit" class="btn">
+          <button type="submit" className="btn">
             Join Chat
           </button>
-          {/* </Link> */}
         </form>
       </main>
     </div>

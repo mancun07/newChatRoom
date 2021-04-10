@@ -22,16 +22,15 @@ const {
 // Set static folder
 app.use(express.static("client/build"));
 
-app.get("*", (req, res) =>
-  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
-);
+// app.get("*", (req, res) =>
+//   res.sendFile(path.resolve(__dirname, "client", "public", "index.html"))
+// );
 
 const Admin = "Admin Team";
 
 // Run when client connects
 io.on("connection", (socket) => {
   socket.on("joinRoom", ({ username, room }) => {
-    console.log(username, room);
     const user = userJoin(socket.id, username, room);
 
     socket.join(user.room);
@@ -71,7 +70,7 @@ io.on("connection", (socket) => {
         formatMessage(Admin, `${user.username} has left the chat`)
       );
 
-      // Send users and room info
+      // Send users and room infoy
       io.to(user.room).emit("roomUsers", {
         room: user.room,
         users: getRoomUsers(user.room),
